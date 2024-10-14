@@ -1,0 +1,431 @@
+/* Reset and Base Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    background-color: #141414;
+    color: #fff;
+}
+
+/* Container */
+.container {
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Header Styles */
+.header {
+    width: 100%;
+    height: 60px;
+    background: rgba(20, 20, 20, 0);
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    padding: 0 4%;
+    transition: background 0.3s ease;
+    z-index: 1000;
+}
+
+.header.scrolled {
+    background: rgba(20, 20, 20, 0.9);
+}
+
+/* Netflix Logo */
+.logo {
+    width: 140px;
+    margin-right: 20px;
+}
+
+.logo img {
+    width: 100%;
+    height: auto;
+}
+
+/* Navigation Links */
+.navigation {
+    display: flex;
+    align-items: center;
+}
+
+.navigation .nav-link {
+    margin-left: 20px;
+}
+
+.navigation .nav-link a {
+    color: #e5e5e5;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.navigation .nav-link a:hover {
+    color: #b3b3b3;
+}
+
+/* Profile Picture */
+.profile-picture {
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-left: auto;
+}
+
+.profile-picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Banner Section */
+.banner {
+    width: 100%;
+    height: 720px;
+    position: relative;
+    overflow: hidden;
+}
+
+.banner::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Updated gradient to include top and bottom */
+    background: linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0.6) 0%,   /* Black at top */
+            rgba(0, 0, 0, 0) 20%,    /* Transparent */
+            rgba(0, 0, 0, 0) 80%,    /* Transparent */
+            rgba(0, 0, 0, 0.6) 100%  /* Black at bottom */
+    );
+    z-index: 1;
+}
+
+/* Background Image */
+.banner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("../images/v9_28096.png") no-repeat center top;
+    background-size: cover;
+    transition: opacity 1s ease-in-out;
+    z-index: 0;
+}
+
+/* Banner Video */
+.banner-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    z-index: 0;
+}
+
+/* Show video when active */
+.banner-video.active {
+    opacity: 1;
+}
+
+/* Hide background image when video is active */
+.banner.video-playing::before {
+    opacity: 0;
+}
+
+.banner-content {
+    position: relative;
+    max-width: 800px;
+    text-align: left;
+    padding: 0 4%;
+    z-index: 2;
+    margin-top: 200px; /* Adjusted to position content lower */
+    transition: all 1s ease-in-out;
+}
+
+/* TV Series Logo */
+.tv-series-logo {
+    transition: transform 1s ease-in-out;
+}
+
+/* Adjust logo position */
+.tv-series-logo img {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+/* Featured Text */
+.featured-text {
+    transition: opacity 1s ease-in-out;
+}
+
+.featured-text p {
+    color: #e6e6e6;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.45);
+    font-size: 18px;
+    margin-bottom: 10px;
+    max-width: 600px;
+}
+
+/* Play Button */
+.play-button {
+    width: 120px;
+    height: 45px;
+    background-color: #fff; /* White background */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    color: #000; /* Black text */
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+    opacity: 1;
+}
+
+.play-button:hover {
+    background-color: #e6e6e6;
+}
+
+/* Hide description text when video is playing */
+.banner.video-playing .featured-text {
+    opacity: 0;
+}
+
+/* Move logo left and down during transition */
+.banner.video-playing .tv-series-logo {
+    transform: translate(-70px, 80px) scale(0.8); /* Adjusted values */
+}
+
+/* Transition back to original state */
+.banner:not(.video-playing) .tv-series-logo {
+    transform: translate(0, 0) scale(1);
+}
+
+/* Movies List Section */
+.movies-list {
+    width: 100%;
+    padding: 50px 4% 20px;
+    background-color: #141414;
+}
+
+.section-title {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.movies-container {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+
+.movie-item {
+    flex: 0 0 auto;
+    width: 300px; /* Adjusted width for wide format */
+    cursor: pointer;
+}
+
+.movie-item img {
+    width: 100%;
+    height: 170px; /* Adjusted height for aspect ratio */
+    object-fit: cover;
+    border-radius: 4px;
+    transition: transform 0.3s;
+}
+
+.movie-item img:hover {
+    transform: scale(1.05);
+}
+
+.movie-item p {
+    text-align: center;
+    font-size: 14px;
+    margin-top: 8px;
+    color: #fff;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.8);
+}
+
+.modal-content {
+    background-color: #141414;
+    margin: 5% auto;
+    padding: 20px;
+    width: 60%;
+    color: #fff;
+    border-radius: 10px;
+}
+
+.close-button {
+    color: #fff;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #bbb;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .banner {
+        height: 600px;
+    }
+
+    .logo {
+        width: 120px;
+    }
+
+    .banner-content {
+        margin-top: 150px;
+    }
+
+    .tv-series-logo img {
+        max-width: 300px;
+    }
+
+    .featured-text p {
+        font-size: 16px;
+    }
+
+    .play-button {
+        width: 100px;
+        height: 40px;
+        font-size: 16px;
+    }
+
+    .movie-item {
+        width: 260px;
+    }
+
+    .movie-item img {
+        height: 150px;
+    }
+}
+
+@media (max-width: 768px) {
+    .header {
+        padding: 0 2%;
+    }
+
+    .logo {
+        width: 100px;
+    }
+
+    .navigation {
+        display: none; /* Hide navigation links on small screens */
+    }
+
+    .profile-picture {
+        margin-left: 0;
+    }
+
+    .banner {
+        height: 500px;
+    }
+
+    .banner-content {
+        padding: 0 2%;
+        margin-top: 120px;
+    }
+
+    .tv-series-logo img {
+        max-width: 250px;
+    }
+
+    .featured-text p {
+        font-size: 14px;
+    }
+
+    .play-button {
+        width: 90px;
+        height: 35px;
+        font-size: 14px;
+    }
+
+    .movies-list {
+        padding: 30px 2% 20px;
+    }
+
+    .section-title {
+        font-size: 18px;
+    }
+
+    .movie-item {
+        width: 220px;
+    }
+
+    .movie-item img {
+        height: 125px;
+    }
+}
+
+@media (max-width: 480px) {
+    .banner {
+        height: 400px;
+    }
+
+    .logo {
+        width: 80px;
+    }
+
+    .banner-content {
+        margin-top: 100px;
+    }
+
+    .tv-series-logo img {
+        max-width: 200px;
+    }
+
+    .featured-text p {
+        font-size: 12px;
+    }
+
+    .play-button {
+        width: 80px;
+        height: 30px;
+        font-size: 12px;
+    }
+
+    .movie-item {
+        width: 180px;
+    }
+
+    .movie-item img {
+        height: 100px;
+    }
+}

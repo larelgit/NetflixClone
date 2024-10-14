@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix Clone</title>
+    <link href="https://fonts.googleapis.com/css?family=Helvetica+Neue&display=swap" rel="stylesheet">
+    <link href="./css/main.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+
+    <!-- Header Section -->
+    <header class="header">
+        <!-- Netflix Logo -->
+        <div class="logo">
+            <img src="./images/Netflix-logo.png" alt="Netflix Logo">
+        </div>
+        <!-- Navigation Links -->
+        <nav class="navigation">
+            <div class="nav-link"><a href="#">Home</a></div>
+            <div class="nav-link"><a href="#">TV Shows</a></div>
+            <div class="nav-link"><a href="#">Movies</a></div>
+            <div class="nav-link"><a href="#">New & Popular</a></div>
+            <div class="nav-link"><a href="#">My List</a></div>
+        </nav>
+        <!-- Profile Picture -->
+        <div class="profile-picture">
+            <img src="./images/v9_28164.png" alt="Profile Picture">
+        </div>
+    </header>
+
+    <!-- Banner Section -->
+    <section class="banner">
+        <!-- Banner Content -->
+        <div class="banner-content">
+            <!-- TV Series Logo -->
+            <div class="tv-series-logo">
+                <img src="./images/v9_28102.png" alt="TV Series Logo">
+            </div>
+            <!-- Featured Movie Text -->
+            <div class="featured-text">
+                <p>His day job shows him how to avoid the police. His night job? A serial killer who takes out criminals who slip through the cracks of justice.</p>
+            </div>
+            <!-- Play Button -->
+            <button class="play-button">Play</button>
+        </div>
+        <!-- Background Video -->
+        <video id="banner-video" class="banner-video" preload="auto">
+            <source src="./videos/trailer.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </section>
+
+    <!-- Movies List Section -->
+    <section class="movies-list">
+        <h2 class="section-title">Popular on Netflix</h2>
+        <div id="movies-container" class="movies-container">
+            <!-- Movies will be dynamically inserted here -->
+        </div>
+    </section>
+
+</div>
+
+<!-- Modal for Movie Details -->
+<div id="movie-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <h2 id="modal-title"></h2>
+        <p id="modal-description"></p>
+    </div>
+</div>
+
+<!-- JavaScript -->
+<script src="./js/main.js"></script>
+</body>
+</html>
