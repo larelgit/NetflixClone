@@ -1,3 +1,4 @@
+
 /* Reset and Base Styles */
 * {
     box-sizing: border-box;
@@ -7,12 +8,10 @@
 
 body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-size: 14px;
     background-color: #141414;
     color: #fff;
 }
 
-/* Container */
 .container {
     width: 100%;
     min-height: 100vh;
@@ -39,10 +38,11 @@ body {
     background: rgba(20, 20, 20, 0.9);
 }
 
-/* Netflix Logo */
 .logo {
     width: 140px;
     margin-right: 20px;
+    position: relative;
+    top: 5px;
 }
 
 .logo img {
@@ -50,7 +50,6 @@ body {
     height: auto;
 }
 
-/* Navigation Links */
 .navigation {
     display: flex;
     align-items: center;
@@ -67,11 +66,10 @@ body {
     font-size: 14px;
 }
 
-.navigation .nav-link a:hover {
-    color: #b3b3b3;
+.navigation .nav-link a.active {
+    font-weight: bold;
 }
 
-/* Profile Picture */
 .profile-picture {
     width: 32px;
     height: 32px;
@@ -89,7 +87,7 @@ body {
 /* Banner Section */
 .banner {
     width: 100%;
-    height: 720px;
+    height: 100vh;
     position: relative;
     overflow: hidden;
 }
@@ -100,21 +98,23 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
-    /* Updated gradient to include top and bottom */
-    background: linear-gradient(
-            to bottom,
-            rgba(0, 0, 0, 0.6) 0%,   /* Black at top */
-            rgba(0, 0, 0, 0) 20%,    /* Transparent */
-            rgba(0, 0, 0, 0) 80%,    /* Transparent */
-            rgba(0, 0, 0, 0.6) 100%  /* Black at bottom */
-    );
-    z-index: 1;
+    height: 80px;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), transparent);
+    z-index: 2;
 }
 
-/* Background Image */
 .banner::before {
     content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(to top, #141414, transparent);
+    z-index: 2;
+}
+
+.banner-bg {
     position: absolute;
     top: 0;
     left: 0;
@@ -126,7 +126,6 @@ body {
     z-index: 0;
 }
 
-/* Banner Video */
 .banner-video {
     position: absolute;
     top: 0;
@@ -136,16 +135,14 @@ body {
     object-fit: cover;
     opacity: 0;
     transition: opacity 1s ease-in-out;
-    z-index: 0;
+    z-index: 1;
 }
 
-/* Show video when active */
 .banner-video.active {
     opacity: 1;
 }
 
-/* Hide background image when video is active */
-.banner.video-playing::before {
+.banner.video-playing .banner-bg {
     opacity: 0;
 }
 
@@ -154,17 +151,17 @@ body {
     max-width: 800px;
     text-align: left;
     padding: 0 4%;
-    z-index: 2;
-    margin-top: 200px; /* Adjusted to position content lower */
+    z-index: 3;
+    top: 50%;
+    transform: translateY(-50%);
     transition: all 1s ease-in-out;
 }
 
-/* TV Series Logo */
 .tv-series-logo {
-    transition: transform 1s ease-in-out;
+    transition: transform 1s ease-in-out 0.5s;
+    transform-origin: center left;
 }
 
-/* Adjust logo position */
 .tv-series-logo img {
     width: 100%;
     max-width: 400px;
@@ -172,7 +169,6 @@ body {
     margin-bottom: 20px;
 }
 
-/* Featured Text */
 .featured-text {
     transition: opacity 1s ease-in-out;
 }
@@ -181,29 +177,65 @@ body {
     color: #e6e6e6;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.45);
     font-size: 18px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     max-width: 600px;
 }
 
-/* Play Button */
-.play-button {
-    width: 120px;
-    height: 45px;
-    background-color: #fff; /* White background */
+.banner-buttons {
+    display: flex;
+    align-items: center;
+}
+
+/* Banner Button Base Styles */
+.banner-button {
+    display: inline-flex;
+    align-items: center;
+    padding: 12px 26px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: 600;
-    font-size: 18px;
-    color: #000; /* Black text */
+    font-size: 20px;
     transition: background-color 0.3s ease;
-    margin-top: 20px;
     opacity: 1;
+    height: 56px;
+}
+
+/* Play Button */
+.play-button {
+    background-color: #fff;
+    color: #000;
+    margin-right: 10px;
 }
 
 .play-button:hover {
     background-color: #e6e6e6;
+}
+
+.play-button .play-icon {
+    width: 40px; /* Increased icon size */
+    height: 40px;
+    margin-right: 10px;
+    fill: currentColor;
+}
+
+/* More Info Button */
+.more-info-button {
+    background-color: rgba(109, 109, 110, 0.7);
+    color: #fff;
+    width: auto;
+}
+
+.more-info-button:hover {
+    background-color: rgba(109, 109, 110, 0.5);
+}
+
+.more-info-button .info-icon {
+    width: 40px; /* Same as play icon */
+    height: 40px;
+    margin-right: 10px;
+    fill: currentColor;
 }
 
 /* Hide description text when video is playing */
@@ -211,12 +243,10 @@ body {
     opacity: 0;
 }
 
-/* Move logo left and down during transition */
 .banner.video-playing .tv-series-logo {
-    transform: translate(-70px, 80px) scale(0.8); /* Adjusted values */
+    transform: translate(0px, 65px) scale(0.85);
 }
 
-/* Transition back to original state */
 .banner:not(.video-playing) .tv-series-logo {
     transform: translate(0, 0) scale(1);
 }
@@ -224,31 +254,36 @@ body {
 /* Movies List Section */
 .movies-list {
     width: 100%;
-    padding: 50px 4% 20px;
     background-color: #141414;
+    padding: 50px 4% 20px;
 }
 
 .section-title {
-    font-size: 20px;
+    font-size: 28px;
     margin-bottom: 10px;
+}
+
+/* Movies Wrapper */
+.movies-wrapper {
+    position: relative;
 }
 
 .movies-container {
     display: flex;
-    gap: 10px;
-    overflow-x: auto;
-    padding-bottom: 10px;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
 }
 
 .movie-item {
     flex: 0 0 auto;
-    width: 300px; /* Adjusted width for wide format */
+    width: 300px;
     cursor: pointer;
+    margin-right: 10px;
 }
 
 .movie-item img {
     width: 100%;
-    height: 170px; /* Adjusted height for aspect ratio */
+    height: 170px;
     object-fit: cover;
     border-radius: 4px;
     transition: transform 0.3s;
@@ -258,11 +293,68 @@ body {
     transform: scale(1.05);
 }
 
-.movie-item p {
-    text-align: center;
-    font-size: 14px;
-    margin-top: 8px;
-    color: #fff;
+/* Scroll Buttons */
+.scroll-button {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 60px;
+    background: rgba(0, 0, 0, 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.movies-wrapper:hover .scroll-button {
+    background: rgba(0, 0, 0, 0.2);
+    opacity: 1;
+}
+
+.scroll-button:hover {
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.left-scroll {
+    left: 0;
+}
+
+.right-scroll {
+    right: 0;
+}
+
+/* Arrow Styles */
+.arrow-left,
+.arrow-right {
+    border: solid #fff;
+    border-width: 0 4px 4px 0;
+    display: inline-block;
+    padding: 12px;
+    transition: transform 0.3s ease;
+}
+
+.arrow-left {
+    transform: rotate(135deg);
+}
+
+.arrow-right {
+    transform: rotate(-45deg);
+}
+
+.scroll-button:hover .arrow-left,
+.scroll-button:hover .arrow-right {
+    transform: scale(1.2);
+}
+
+.scroll-button:hover .arrow-left {
+    transform: scale(1.2) rotate(135deg);
+}
+
+.scroll-button:hover .arrow-right {
+    transform: scale(1.2) rotate(-45deg);
 }
 
 /* Modal Styles */
@@ -270,34 +362,147 @@ body {
     display: none;
     position: fixed;
     z-index: 2000;
-    left: 0;
     top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.8);
+    background-color: rgba(0, 0, 0, 0.85);
+    overflow-y: auto;
 }
 
 .modal-content {
+    position: relative;
     background-color: #141414;
-    margin: 5% auto;
-    padding: 20px;
-    width: 60%;
-    color: #fff;
+    margin: 40px auto;
+    width: 80%;
+    max-width: 875px; /* Increased width */
     border-radius: 10px;
+    overflow: hidden;
 }
 
-.close-button {
-    color: #fff;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
+/* Close Button */
+.modal-close-button {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background-color: rgba(0, 0, 0, 0.9); /* Partly transparent black */
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
     cursor: pointer;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.close-button:hover,
-.close-button:focus {
-    color: #bbb;
+.modal-close-button .close-icon {
+    width: 30px;
+    height: 30px;
+}
+
+.modal-close-button .close-icon circle {
+    fill: rgba(0, 0, 0, 0.9);
+}
+
+.modal-close-button .close-icon line {
+    stroke: #fff;
+    stroke-width: 2;
+    stroke-linecap: round;
+}
+
+
+
+.modal-banner {
+    position: relative;
+    width: 100%;
+    height: 500px; /* Increased height for the video */
+    background-color: #000;
+    overflow: hidden;
+}
+
+
+.modal-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.modal-banner-content {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    z-index: 2;
+}
+
+.modal-tv-series-logo img {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.modal-buttons {
+    display: flex;
+    align-items: center;
+}
+
+/* Modal Play Button */
+.modal-play-button {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 23px;
+    background-color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 600;
+    font-size: 23px;
+    color: #000;
+    transition: background-color 0.3s ease;
+    opacity: 1;
+}
+
+.modal-play-button:hover {
+    background-color: #e6e6e6;
+}
+
+.modal-play-button .modal-play-icon {
+    width: 50px;
+    height: 40px;
+    margin-right: 10px;
+    fill: currentColor;
+}
+
+/* Modal Banner Gradient */
+.modal-banner-gradient {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(to top, #141414, transparent);
+    z-index: 1;
+}
+
+/* Modal Description */
+.modal-description {
+    padding: 20px;
+    background-color: #141414;
+    flex-grow: 1;
+}
+
+.modal-description p {
+    font-size: 16px;
+    line-height: 1.4;
+    min-height: 200px; /* Increased height for the grey background */
+}
+
+/* Hide overflow for HTML and body when modal is open */
+body.modal-open {
+    overflow: hidden;
 }
 
 /* Responsive Design */

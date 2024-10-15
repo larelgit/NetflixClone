@@ -2,9 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <!-- Meta viewport for responsiveness -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Netflix Clone</title>
-    <link href="https://fonts.googleapis.com/css?family=Helvetica+Neue&display=swap" rel="stylesheet">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Helvetica+Neue&display=swap">
+    <!-- CSS -->
     <link href="./css/main.css" rel="stylesheet">
 </head>
 <body>
@@ -18,7 +21,7 @@
         </div>
         <!-- Navigation Links -->
         <nav class="navigation">
-            <div class="nav-link"><a href="#">Home</a></div>
+            <div class="nav-link"><a href="#" class="active">Home</a></div>
             <div class="nav-link"><a href="#">TV Shows</a></div>
             <div class="nav-link"><a href="#">Movies</a></div>
             <div class="nav-link"><a href="#">New & Popular</a></div>
@@ -40,34 +43,113 @@
             </div>
             <!-- Featured Movie Text -->
             <div class="featured-text">
-                <p>His day job shows him how to avoid the police. His night job? A serial killer who takes out criminals who slip through the cracks of justice.</p>
+                <p>His day job shows him how to avoid the police. His night job? A serial
+                    killer who takes out criminals who slip through the cracks of justice.</p>
             </div>
-            <!-- Play Button -->
-            <button class="play-button">Play</button>
+            <!-- Buttons -->
+            <div class="banner-buttons">
+                <!-- Play Button -->
+                <button class="play-button banner-button">
+                    <!-- Play Icon -->
+                    <svg class="play-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <!-- SVG path for play icon -->
+                        <path fill="currentColor" d="M5 3l14 9-14 9V3z"/>
+                    </svg>
+                    Play
+                </button>
+                <!-- More Info Button -->
+                <button class="more-info-button banner-button">
+                    <!-- Info Icon -->
+                    <svg class="info-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <!-- SVG path for info icon -->
+                        <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/>
+                        <line x1="12" y1="8" x2="12" y2="12" stroke="currentColor" stroke-width="2"/>
+                        <circle cx="12" cy="16" r="1" fill="currentColor"/>
+                    </svg>
+                    More Info
+                </button>
+            </div>
         </div>
         <!-- Background Video -->
+        <!-- Removed 'muted' attribute to unmute the video -->
         <video id="banner-video" class="banner-video" preload="auto">
             <source src="./videos/trailer.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
+        <!-- Banner Background -->
+        <div class="banner-bg"></div>
     </section>
 
     <!-- Movies List Section -->
     <section class="movies-list">
         <h2 class="section-title">Popular on Netflix</h2>
-        <div id="movies-container" class="movies-container">
-            <!-- Movies will be dynamically inserted here -->
+        <div class="movies-wrapper">
+            <!-- Left Scroll Button -->
+            <div class="scroll-button left-scroll">
+                <div class="arrow-left"></div>
+            </div>
+            <!-- Movies Container -->
+            <div id="movies-container" class="movies-container">
+                <!-- Movies will be dynamically inserted here -->
+            </div>
+            <!-- Right Scroll Button -->
+            <div class="scroll-button right-scroll">
+                <div class="arrow-right"></div>
+            </div>
         </div>
     </section>
 
 </div>
 
-<!-- Modal for Movie Details -->
-<div id="movie-modal" class="modal">
+<!-- Modal for More Info -->
+<div id="more-info-modal" class="modal">
     <div class="modal-content">
-        <span class="close-button">&times;</span>
-        <h2 id="modal-title"></h2>
-        <p id="modal-description"></p>
+        <!-- Close Button -->
+        <button class="modal-close-button">
+            <!-- Close Icon -->
+            <svg class="close-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <!-- SVG path for close icon -->
+                <circle cx="12" cy="12" r="10" fill="rgba(0,0,0,0.9)"/>
+                <line x1="9" y1="9" x2="15" y2="15" stroke="#fff" stroke-width="2"/>
+                <line x1="15" y1="9" x2="9" y2="15" stroke="#fff" stroke-width="2"/>
+            </svg>
+        </button>
+        <!-- Modal Banner -->
+        <div class="modal-banner">
+            <!-- Modal Video -->
+            <!-- Removed 'muted' attribute to unmute the video -->
+            <video id="modal-video" class="modal-video" autoplay loop>
+                <source src="./videos/trailer.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <!-- Modal Content -->
+            <div class="modal-banner-content">
+                <!-- TV Series Logo -->
+                <div class="modal-tv-series-logo">
+                    <img src="./images/v9_28102.png" alt="TV Series Logo">
+                </div>
+                <!-- Modal Buttons -->
+                <div class="modal-buttons">
+                    <!-- Play Button -->
+                    <button class="modal-play-button">
+                        <!-- Play Icon -->
+                        <svg class="modal-play-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <!-- SVG path for play icon -->
+                            <path fill="currentColor" d="M5 3l14 9-14 9V3z"/>
+                        </svg>
+                        Play
+                    </button>
+                </div>
+            </div>
+            <!-- Modal Banner Gradient -->
+            <div class="modal-banner-gradient"></div>
+        </div>
+        <!-- Modal Description -->
+        <!-- Extended the grey background height in the modal description -->
+        <div class="modal-description">
+            <p>His day job shows him how to avoid the police. His night job? A serial
+                killer who takes out criminals who slip through the cracks of justice.</p>
+        </div>
     </div>
 </div>
 

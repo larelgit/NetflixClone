@@ -21,8 +21,73 @@ const movies = [
         image: "strangerthings.png",
         rating: "16+"
     },
-    // Add more movie objects as needed
+    // Duplicated Movies to Fill the List
+    {
+        id: 4,
+        title: "The Matrix Reloaded",
+        description: "Neo and the rebel leaders estimate that they have 72 hours until Zion falls.",
+        image: "matrix.png",
+        rating: "16+"
+    },
+    {
+        id: 5,
+        title: "Inception (Alternate)",
+        description: "A thief who steals corporate secrets through dream-sharing technology.",
+        image: "inception.png",
+        rating: "13+"
+    },
+    {
+        id: 6,
+        title: "Stranger Things 2",
+        description: "The adventure continues as supernatural forces return to Hawkins.",
+        image: "strangerthings.png",
+        rating: "16+"
+    },
+    {
+        id: 7,
+        title: "The Matrix Revolutions",
+        description: "The human city of Zion defends itself against the massive invasion of the machines.",
+        image: "matrix.png",
+        rating: "16+"
+    },
+    {
+        id: 8,
+        title: "Inception Dream",
+        description: "A team embarks on a mission in the dream world.",
+        image: "inception.png",
+        rating: "13+"
+    },
+    {
+        id: 9,
+        title: "Stranger Things 3",
+        description: "New threats emerge as the kids face adolescence and supernatural forces.",
+        image: "strangerthings.png",
+        rating: "16+"
+    },
+    // Additional duplicates if needed
+    {
+        id: 10,
+        title: "The Matrix Awakens",
+        description: "A new simulation reveals deeper layers of reality.",
+        image: "matrix.png",
+        rating: "16+"
+    },
+    {
+        id: 11,
+        title: "Inception Reality",
+        description: "The line between dreams and reality blurs.",
+        image: "inception.png",
+        rating: "13+"
+    },
+    {
+        id: 12,
+        title: "Stranger Things 4",
+        description: "The gang faces their most terrifying threat yet.",
+        image: "strangerthings.png",
+        rating: "16+"
+    }
 ];
+
 
 // Function to Load Movies
 function loadMovies() {
@@ -36,50 +101,45 @@ function loadMovies() {
         movieImage.src = `./images/${movie.image}`;
         movieImage.alt = movie.title;
 
-        const movieTitle = document.createElement('p');
-        movieTitle.textContent = movie.title;
-
         movieDiv.appendChild(movieImage);
-        movieDiv.appendChild(movieTitle);
-
-        // Add click event to show movie details
-        movieDiv.addEventListener('click', () => showMovieDetails(movie));
 
         moviesContainer.appendChild(movieDiv);
     });
+
+    // Scroll Button Functionality
+    const leftScrollButton = document.querySelector('.left-scroll');
+    const rightScrollButton = document.querySelector('.right-scroll');
+
+    leftScrollButton.addEventListener('click', () => {
+        moviesContainer.scrollBy({
+            left: -300, // Adjust scrolling distance
+            behavior: 'smooth'
+        });
+    });
+
+    rightScrollButton.addEventListener('click', () => {
+        moviesContainer.scrollBy({
+            left: 300, // Adjust scrolling distance
+            behavior: 'smooth'
+        });
+    });
 }
 
-// Modal Elements
-const modal = document.getElementById('movie-modal');
-const modalTitle = document.getElementById('modal-title');
-const modalDescription = document.getElementById('modal-description');
-const closeButton = document.querySelector('.close-button');
+// Global Variables
+const bannerVideo = document.getElementById('banner-video');
+const banner = document.querySelector('.banner');
+const modalVideo = document.getElementById('modal-video');
 
-// Function to Show Movie Details in Modal
-function showMovieDetails(movie) {
-    modalTitle.textContent = movie.title;
-    modalDescription.textContent = movie.description;
-    modal.style.display = 'block';
-}
-
-// Close Modal
-closeButton.addEventListener('click', () => {
-    modal.style.display = 'none';
+// Preload and Preplay Modal Video for Smooth Transition
+modalVideo.muted = true;
+modalVideo.play().catch(error => {
+    console.error('Error preplaying modal video:', error);
 });
-
-// Close Modal When Clicking Outside
-window.addEventListener('click', (event) => {
-    if (event.target == modal) {
-        modal.style.display = 'none';
-    }
-});
+modalVideo.pause(); // Pause it after preloading
 
 // Play Button Functionality
 const playButton = document.querySelector('.play-button');
 playButton.addEventListener('click', () => {
-    const bannerVideo = document.getElementById('banner-video');
-    const banner = document.querySelector('.banner');
-
     bannerVideo.muted = false; // Unmute the video
     bannerVideo.play().catch(error => {
         console.error('Error playing video:', error);
@@ -92,6 +152,57 @@ playButton.addEventListener('click', () => {
     }
     if (!banner.classList.contains('video-playing')) {
         banner.classList.add('video-playing');
+    }
+});
+
+// More Info Button Functionality
+const moreInfoButton = document.querySelector('.more-info-button');
+const moreInfoModal = document.getElementById('more-info-modal');
+const modalCloseButton = document.querySelector('.modal-close-button');
+
+moreInfoButton.addEventListener('click', () => {
+    // Pause banner video
+    let currentTime = bannerVideo.currentTime;
+    bannerVideo.pause();
+    banner.classList.remove('video-playing');
+    bannerVideo.classList.remove('active');
+    bannerVideo.removeAttribute('controls');
+    bannerVideo.muted = true;
+
+    // Set modal video time to match banner video
+    modalVideo.currentTime = currentTime;
+    modalVideo.play();
+    modalVideo.muted = false;
+
+    // Show modal
+    moreInfoModal.style.display = 'flex';
+    document.body.classList.add('modal-open');
+});
+
+modalCloseButton.addEventListener('click', () => {
+    // Pause modal video
+    let currentTime = modalVideo.currentTime;
+    modalVideo.pause();
+    modalVideo.currentTime = 0;
+    modalVideo.muted = true;
+
+    // Resume banner video from same time
+    bannerVideo.currentTime = currentTime;
+    // Ensure banner video plays if it was playing before
+    banner.classList.add('video-playing');
+    bannerVideo.classList.add('active');
+    bannerVideo.play();
+    bannerVideo.muted = false;
+
+    // Hide modal
+    moreInfoModal.style.display = 'none';
+    document.body.classList.remove('modal-open');
+});
+
+// Close Modal When Clicking Outside
+moreInfoModal.addEventListener('click', (event) => {
+    if (event.target === moreInfoModal) {
+        modalCloseButton.click();
     }
 });
 
@@ -109,8 +220,6 @@ window.addEventListener('scroll', () => {
 document.addEventListener('DOMContentLoaded', () => {
     loadMovies();
 
-    const banner = document.querySelector('.banner');
-    const bannerVideo = document.getElementById('banner-video');
     let transitionStarted = false;
 
     // Function to start video transition
@@ -144,6 +253,6 @@ document.addEventListener('DOMContentLoaded', () => {
         bannerVideo.currentTime = 0; // Reset video to start
 
         // Mute the video again
-        bannerVideo.muted = true;
+        bannerVideo.muted = false;
     });
 });
