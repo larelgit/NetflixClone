@@ -1,0 +1,282 @@
+/* Reset and Base Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: #fff;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    width: 100%;
+    position: relative;
+    overflow-x: hidden;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+header, footer {
+    flex-shrink: 0;
+}
+
+.header {
+    width: 100%;
+    height: 70px;
+    background-color: #fff;
+    border-bottom: 1px solid #e6e6e6;
+    display: flex;
+    align-items: center;
+    padding: 0 4%;
+    z-index: 1000;
+}
+
+.logo {
+    width: 200px;
+}
+
+.logo img {
+    width: 100%;
+    height: auto;
+}
+
+.signin-link {
+    margin-left: auto;
+}
+
+.signin-link a {
+    font-size: 16px;
+    color: #333;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.signin-link a:hover {
+    text-decoration: underline;
+}
+
+/* Main Content Styles */
+.signup-content {
+    max-width: 340px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 30px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centers content vertically */
+}
+
+.step-indicator {
+    display: flex;
+    flex-direction: column; /* Arrange items vertically */
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px; /* Adjusted vertical gap */
+}
+
+.step-indicator .tick-icon-large {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 10px; /* Space between icon and text */
+    flex-shrink: 0;
+}
+
+.step-indicator p {
+    font-size: 13px;
+    color: #333333;
+    margin: 0;
+}
+
+.step-indicator strong {
+    font-weight: 500;
+}
+
+.signup-content h1 {
+    font-size: 32px;
+    font-weight: 500;
+    color: #333333;
+    margin-bottom: 40px; /* Increased vertical gap */
+}
+
+.signup-benefits {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 30px; /* Adjusted vertical gap */
+    text-align: left;
+}
+
+.signup-benefits li {
+    display: flex;
+    align-items: flex-start;
+    font-size: 18px;
+    color: #333333;
+    margin-bottom: 24px; /* Adjusted vertical gap */
+}
+
+.signup-benefits .tick-icon-small {
+    width: 32px; /* Slightly increased size */
+    height: 32px;
+    margin-right: 12px;
+    flex-shrink: 0;
+}
+
+.next-button {
+    display: inline-block;
+    padding: 14px 30px;
+    background-color: #E50914;
+    color: #fff;
+    font-size: 24px;
+    font-weight: 500;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 24px;
+    width: 100%;
+    max-width: 360px;
+}
+
+.next-button:hover {
+    background-color: #f6121d;
+}
+
+/* Footer Styles */
+.footer {
+    background-color: #f3f3f3;
+    padding: 30px 4%;
+    font-size: 13px;
+    color: #737373;
+}
+
+.footer-top {
+    margin-bottom: 20px;
+}
+
+.footer-top p {
+    margin: 0;
+}
+
+.footer-top a {
+    color: #737373;
+    text-decoration: underline;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px 0;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.footer-links li {
+    width: 25%;
+    margin-bottom: 10px;
+}
+
+.footer-links a {
+    color: #737373;
+    text-decoration: none;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
+.language-selector {
+    width: 150px;
+    padding: 10px;
+    margin: 0 auto;
+}
+
+.language-selector select {
+    width: 100%;
+    padding: 10px;
+    background-color: transparent;
+    color: #737373;
+    border: 1px solid #333333;
+    border-radius: 2px;
+}
+
+.language-selector select option {
+    background-color: #fff;
+    color: #000;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .signup-benefits li {
+        font-size: 16px;
+    }
+
+    .next-button {
+        font-size: 20px;
+    }
+
+    .footer-links li {
+        width: 50%;
+    }
+
+    .logo {
+        width: 160px; /* Adjusted size for responsiveness */
+    }
+
+    .step-indicator .tick-icon-large {
+        width: 50px;
+        height: 50px;
+        margin-bottom: 8px;
+    }
+
+    .signup-benefits .tick-icon-small {
+        width: 28px;
+        height: 28px;
+        margin-right: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .signup-content {
+        padding: 10px;
+    }
+
+    .signup-content h1 {
+        font-size: 24px;
+    }
+
+    .signup-benefits li {
+        font-size: 14px;
+    }
+
+    .next-button {
+        font-size: 18px;
+    }
+
+    .logo {
+        width: 140px;
+    }
+
+    .step-indicator .tick-icon-large {
+        width: 40px;
+        height: 40px;
+        margin-bottom: 6px;
+    }
+
+    .signup-benefits .tick-icon-small {
+        width: 24px;
+        height: 24px;
+        margin-right: 8px;
+    }
+}
+
+/* End of CSS */
