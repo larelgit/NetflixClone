@@ -42,7 +42,7 @@ header, footer {
 }
 
 .logo {
-    width: 200px;
+    width: 140px;
 }
 
 .logo img {
@@ -229,7 +229,7 @@ header, footer {
     }
 
     .logo {
-        width: 160px; /* Adjusted size for responsiveness */
+        width: 140px; /* Adjusted size for responsiveness */
     }
 
     .step-indicator .tick-icon-large {
