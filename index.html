@@ -17,7 +17,9 @@
     <header class="header">
         <!-- Netflix Logo -->
         <div class="logo">
-            <img src="./images/netflix-logo0.svg" alt="Netflix Logo">
+            <a href="index.html">
+                <img src="./images/netflix-logo0.svg" alt="Netflix Logo">
+            </a>
         </div>
         <!-- Navigation Links -->
         <nav class="navigation">
@@ -30,6 +32,12 @@
         <!-- Profile Picture -->
         <div class="profile-picture">
             <img src="./images/v9_28164.png" alt="Profile Picture">
+            <!-- Popup Menu -->
+            <div id="profile-popup" class="profile-popup">
+                <ul>
+                    <li><button id="sign-out-button">Sign Out</button></li>
+                </ul>
+            </div>
         </div>
     </header>
 
@@ -71,7 +79,6 @@
             </div>
         </div>
         <!-- Background Video -->
-        <!-- Removed 'muted' attribute to unmute the video -->
         <video id="banner-video" class="banner-video" preload="auto">
             <source src="./videos/trailer.mp4" type="video/mp4">
             Your browser does not support the video tag.
@@ -117,8 +124,7 @@
         <!-- Modal Banner -->
         <div class="modal-banner">
             <!-- Modal Video -->
-            <!-- Removed 'muted' attribute to unmute the video -->
-            <video id="modal-video" class="modal-video" autoplay loop>
+            <video id="modal-video" class="modal-video" preload="auto">
                 <source src="./videos/trailer.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
@@ -145,7 +151,6 @@
             <div class="modal-banner-gradient"></div>
         </div>
         <!-- Modal Description -->
-        <!-- Extended the grey background height in the modal description -->
         <div class="modal-description">
             <p>His day job shows him how to avoid the police. His night job? A serial
                 killer who takes out criminals who slip through the cracks of justice.</p>

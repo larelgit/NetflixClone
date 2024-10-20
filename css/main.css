@@ -1,4 +1,3 @@
-
 /* Reset and Base Styles */
 * {
     box-sizing: border-box;
@@ -42,7 +41,6 @@ body {
     width: 140px;
     margin-right: 20px;
     position: relative;
-    top: 5px;
 }
 
 .logo img {
@@ -50,6 +48,7 @@ body {
     height: auto;
 }
 
+/* Navigation */
 .navigation {
     display: flex;
     align-items: center;
@@ -70,6 +69,27 @@ body {
     font-weight: bold;
 }
 
+.profile-popup {
+    display: none;
+    position: absolute;
+    top: 40px;
+    right: 0;
+    background-color: #141414;
+    border: 1px solid #333;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
+    border-radius: 5px;
+    z-index: 1001;
+    min-width: 160px;
+}
+
+.profile-popup.show {
+    display: block;
+}
+
+.profile-popup.show {
+    display: block;
+}
+
 .profile-picture {
     width: 32px;
     height: 32px;
@@ -82,6 +102,41 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+
+.profile-popup.show {
+    display: block;
+}
+
+.profile-popup ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.profile-popup ul li {
+    padding: 10px 16px;
+}
+
+.profile-popup ul li button {
+    background: none;
+    border: none;
+    color: #e5e5e5;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.profile-popup ul li button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.profile-popup ul li button:focus {
+    outline: none;
 }
 
 /* Banner Section */
@@ -214,7 +269,7 @@ body {
 }
 
 .play-button .play-icon {
-    width: 40px; /* Increased icon size */
+    width: 40px;
     height: 40px;
     margin-right: 10px;
     fill: currentColor;
@@ -232,7 +287,7 @@ body {
 }
 
 .more-info-button .info-icon {
-    width: 40px; /* Same as play icon */
+    width: 40px;
     height: 40px;
     margin-right: 10px;
     fill: currentColor;
@@ -375,7 +430,7 @@ body {
     background-color: #141414;
     margin: 40px auto;
     width: 80%;
-    max-width: 875px; /* Increased width */
+    max-width: 875px;
     border-radius: 10px;
     overflow: hidden;
 }
@@ -385,7 +440,7 @@ body {
     position: absolute;
     top: 16px;
     right: 16px;
-    background-color: rgba(0, 0, 0, 0.9); /* Partly transparent black */
+    background-color: rgba(0, 0, 0, 0.9);
     border: none;
     border-radius: 50%;
     width: 36px;
@@ -412,16 +467,13 @@ body {
     stroke-linecap: round;
 }
 
-
-
 .modal-banner {
     position: relative;
     width: 100%;
-    height: 500px; /* Increased height for the video */
+    height: 500px;
     background-color: #000;
     overflow: hidden;
 }
-
 
 .modal-video {
     width: 100%;
@@ -497,7 +549,7 @@ body {
 .modal-description p {
     font-size: 16px;
     line-height: 1.4;
-    min-height: 200px; /* Increased height for the grey background */
+    min-height: 200px;
 }
 
 /* Hide overflow for HTML and body when modal is open */
@@ -552,7 +604,7 @@ body.modal-open {
     }
 
     .navigation {
-        display: none; /* Hide navigation links on small screens */
+        display: none;
     }
 
     .profile-picture {

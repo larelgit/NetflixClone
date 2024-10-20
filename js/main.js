@@ -88,138 +88,143 @@ const movies = [
     }
 ];
 
-
-// Function to Load Movies
-function loadMovies() {
-    const moviesContainer = document.getElementById('movies-container');
-
-    movies.forEach(movie => {
-        const movieDiv = document.createElement('div');
-        movieDiv.classList.add('movie-item');
-
-        const movieImage = document.createElement('img');
-        movieImage.src = `./images/${movie.image}`;
-        movieImage.alt = movie.title;
-
-        movieDiv.appendChild(movieImage);
-
-        moviesContainer.appendChild(movieDiv);
-    });
-
-    // Scroll Button Functionality
-    const leftScrollButton = document.querySelector('.left-scroll');
-    const rightScrollButton = document.querySelector('.right-scroll');
-
-    leftScrollButton.addEventListener('click', () => {
-        moviesContainer.scrollBy({
-            left: -300, // Adjust scrolling distance
-            behavior: 'smooth'
-        });
-    });
-
-    rightScrollButton.addEventListener('click', () => {
-        moviesContainer.scrollBy({
-            left: 300, // Adjust scrolling distance
-            behavior: 'smooth'
-        });
-    });
-}
-
-// Global Variables
-const bannerVideo = document.getElementById('banner-video');
-const banner = document.querySelector('.banner');
-const modalVideo = document.getElementById('modal-video');
-
-// Preload and Preplay Modal Video for Smooth Transition
-modalVideo.muted = true;
-modalVideo.play().catch(error => {
-    console.error('Error preplaying modal video:', error);
-});
-modalVideo.pause(); // Pause it after preloading
-
-// Play Button Functionality
-const playButton = document.querySelector('.play-button');
-playButton.addEventListener('click', () => {
-    bannerVideo.muted = false; // Unmute the video
-    bannerVideo.play().catch(error => {
-        console.error('Error playing video:', error);
-    });
-    bannerVideo.setAttribute('controls', 'controls'); // Show video controls
-
-    // Add classes to trigger CSS animations if not already added
-    if (!bannerVideo.classList.contains('active')) {
-        bannerVideo.classList.add('active');
-    }
-    if (!banner.classList.contains('video-playing')) {
-        banner.classList.add('video-playing');
-    }
-});
-
-// More Info Button Functionality
-const moreInfoButton = document.querySelector('.more-info-button');
-const moreInfoModal = document.getElementById('more-info-modal');
-const modalCloseButton = document.querySelector('.modal-close-button');
-
-moreInfoButton.addEventListener('click', () => {
-    // Pause banner video
-    let currentTime = bannerVideo.currentTime;
-    bannerVideo.pause();
-    banner.classList.remove('video-playing');
-    bannerVideo.classList.remove('active');
-    bannerVideo.removeAttribute('controls');
-    bannerVideo.muted = true;
-
-    // Set modal video time to match banner video
-    modalVideo.currentTime = currentTime;
-    modalVideo.play();
-    modalVideo.muted = false;
-
-    // Show modal
-    moreInfoModal.style.display = 'flex';
-    document.body.classList.add('modal-open');
-});
-
-modalCloseButton.addEventListener('click', () => {
-    // Pause modal video
-    let currentTime = modalVideo.currentTime;
-    modalVideo.pause();
-    modalVideo.currentTime = 0;
-    modalVideo.muted = true;
-
-    // Resume banner video from same time
-    bannerVideo.currentTime = currentTime;
-    // Ensure banner video plays if it was playing before
-    banner.classList.add('video-playing');
-    bannerVideo.classList.add('active');
-    bannerVideo.play();
-    bannerVideo.muted = false;
-
-    // Hide modal
-    moreInfoModal.style.display = 'none';
-    document.body.classList.remove('modal-open');
-});
-
-// Close Modal When Clicking Outside
-moreInfoModal.addEventListener('click', (event) => {
-    if (event.target === moreInfoModal) {
-        modalCloseButton.click();
-    }
-});
-
-// Scroll Event to Change Header Transparency
-window.addEventListener('scroll', () => {
-    const header = document.querySelector('.header');
-    if (window.scrollY > 50) {
-        header.classList.add('scrolled');
-    } else {
-        header.classList.remove('scrolled');
-    }
-});
-
-// Banner Video Transition
 document.addEventListener('DOMContentLoaded', () => {
+    // Global Variables
+    const bannerVideo = document.getElementById('banner-video');
+    const banner = document.querySelector('.banner');
+    const modalVideo = document.getElementById('modal-video');
+    const playButton = document.querySelector('.play-button');
+    const moreInfoButton = document.querySelector('.more-info-button');
+    const moreInfoModal = document.getElementById('more-info-modal');
+    const modalCloseButton = document.querySelector('.modal-close-button');
+
+    const profilePicture = document.querySelector('.profile-picture');
+    const profilePopup = document.getElementById('profile-popup');
+    const signOutButton = document.getElementById('sign-out-button');
+
+    // Function to Load Movies
+    function loadMovies() {
+        const moviesContainer = document.getElementById('movies-container');
+
+        movies.forEach(movie => {
+            const movieDiv = document.createElement('div');
+            movieDiv.classList.add('movie-item');
+
+            const movieImage = document.createElement('img');
+            movieImage.src = `./images/${movie.image}`;
+            movieImage.alt = movie.title;
+
+            movieDiv.appendChild(movieImage);
+
+            moviesContainer.appendChild(movieDiv);
+        });
+
+        // Scroll Button Functionality
+        const leftScrollButton = document.querySelector('.left-scroll');
+        const rightScrollButton = document.querySelector('.right-scroll');
+
+        leftScrollButton.addEventListener('click', () => {
+            moviesContainer.scrollBy({
+                left: -300, // Adjust scrolling distance
+                behavior: 'smooth'
+            });
+        });
+
+        rightScrollButton.addEventListener('click', () => {
+            moviesContainer.scrollBy({
+                left: 300, // Adjust scrolling distance
+                behavior: 'smooth'
+            });
+        });
+    }
+
+    // Load Movies
     loadMovies();
 
+    // Preload and Preplay Modal Video for Smooth Transition
+    modalVideo.muted = true;
+    modalVideo.pause(); // Ensure it's paused
+
+    // Play Button Functionality
+    playButton.addEventListener('click', () => {
+        bannerVideo.muted = false; // Unmute the video
+        bannerVideo.play().catch(error => {
+            console.error('Error playing video:', error);
+        });
+        bannerVideo.setAttribute('controls', 'controls'); // Show video controls
+
+        // Add classes to trigger CSS animations if not already added
+        if (!bannerVideo.classList.contains('active')) {
+            bannerVideo.classList.add('active');
+        }
+        if (!banner.classList.contains('video-playing')) {
+            banner.classList.add('video-playing');
+        }
+    });
+
+    // More Info Button Functionality
+    moreInfoButton.addEventListener('click', () => {
+        // Pause banner video
+        let currentTime = bannerVideo.currentTime;
+        bannerVideo.pause();
+        bannerVideo.muted = true;
+        bannerVideo.classList.remove('active');
+        banner.classList.remove('video-playing');
+        bannerVideo.removeAttribute('controls');
+
+        // Set modal video time to match banner video
+        modalVideo.currentTime = currentTime;
+        modalVideo.muted = false;
+
+        modalVideo.play().catch(error => {
+            console.error('Error playing modal video:', error);
+        });
+
+        // Show modal
+        moreInfoModal.style.display = 'flex';
+        document.body.classList.add('modal-open');
+    });
+
+    // Close Modal Button Functionality
+    modalCloseButton.addEventListener('click', () => {
+        // Pause modal video
+        let currentTime = modalVideo.currentTime;
+        modalVideo.pause();
+        modalVideo.currentTime = 0;
+        modalVideo.muted = true;
+
+        // Resume banner video from same time
+        bannerVideo.currentTime = currentTime;
+        bannerVideo.play().catch(error => {
+            console.error('Error playing banner video:', error);
+        });
+        bannerVideo.muted = false;
+        bannerVideo.classList.add('active');
+        banner.classList.add('video-playing');
+
+        // Hide modal
+        moreInfoModal.style.display = 'none';
+        document.body.classList.remove('modal-open');
+    });
+
+    // Close Modal When Clicking Outside
+    moreInfoModal.addEventListener('click', (event) => {
+        if (event.target === moreInfoModal) {
+            modalCloseButton.click();
+        }
+    });
+
+    // Scroll Event to Change Header Transparency
+    window.addEventListener('scroll', () => {
+        const header = document.querySelector('.header');
+        if (window.scrollY > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
+
+    // Banner Video Transition
     let transitionStarted = false;
 
     // Function to start video transition
@@ -253,6 +258,27 @@ document.addEventListener('DOMContentLoaded', () => {
         bannerVideo.currentTime = 0; // Reset video to start
 
         // Mute the video again
-        bannerVideo.muted = false;
+        bannerVideo.muted = true;
+    });
+
+    // ============================
+    // Profile Popup Functionality
+    // ============================
+
+    // Toggle Popup Visibility on Profile Picture Click
+    profilePicture.addEventListener('click', (event) => {
+        event.stopPropagation(); // Prevent event from bubbling up
+        profilePopup.classList.toggle('show');
+    });
+
+    document.addEventListener('click', (event) => {
+        if (!profilePicture.contains(event.target) && !profilePopup.contains(event.target)) {
+            profilePopup.classList.remove('show');
+        }
+    });
+
+    // Sign Out Button Functionality
+    signOutButton.addEventListener('click', () => {
+        window.location.href = 'signup.html';
     });
 });
